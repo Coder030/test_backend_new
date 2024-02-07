@@ -11,6 +11,9 @@ app.get('/', (req, res) => {
   console.log('hello from express!');
   res.json({message: 'this is GET /'})
 })
+app.get('/full', (req, res) => {
+  res.json(job)
+})
 
 app.post('/', (req, res) => {
   job.push(req.body.item) // add the object in the list
