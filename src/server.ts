@@ -1,7 +1,7 @@
 import express from "express"
 import cors from 'cors'
 
-const job: string[] = [];
+const jobs: string[] = [];
 export const app = express()
 
 app.use(cors())
@@ -12,11 +12,11 @@ app.get('/', (req, res) => {
   res.json({message: 'this is GET /'})
 })
 app.get('/full', (req, res) => {
-  res.json(job)
+  res.json(jobs)
 })
 
 app.post('/', (req, res) => {
-  job.push(req.body.item) // add the object in the list
-  console.log(job);
-  res.json(job)
+  jobs.push(req.body.item) // add the object in the list
+  console.log(jobs);
+  res.json(jobs)
 })
