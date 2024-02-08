@@ -11,11 +11,11 @@ app.get('/', (req, res) => {
   console.log('hello from express!');
   res.json({message: 'this is GET /'})
 })
-app.get('/full', (req, res) => {
+app.get('/api/full', (req, res) => {
   res.json(jobs)
 })
 
-app.post('/', (req, res) => {
+app.post('/api', (req, res) => {
   jobs.push(req.body.item) // add the object in the list
   console.log(jobs);
   res.json(jobs)
