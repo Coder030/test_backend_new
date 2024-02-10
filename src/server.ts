@@ -17,9 +17,13 @@ app.get('/', (req, res) => {
 app.use('/api', () =>{
   cookieParser()
 })
-app.get('/get_cookie', (req, res) => {
+app.get('/make_cookie', (req, res) => {
   const name = req.body.name
   res.cookie(name, 'cookie_value')
+})
+app.post('/get_cookie', (req, res) => {
+  const name = req.body.name
+  res.send(req.cookies.name)
 })
 
 app.get('/api/full', (req, res) => {
