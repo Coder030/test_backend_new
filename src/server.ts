@@ -4,7 +4,7 @@ const cookieParser =  require('cookie-parser')
 
 const jobs: string[] = [];
 export const app = express()
-
+let name2;
 app.use(cors())
 app.use(express.json())
 
@@ -18,12 +18,13 @@ app.use('/api', () =>{
   cookieParser()
 })
 app.get('/make_cookie', (req, res) => {
-  const name = req.body.name
-  res.cookie(name, 'cookie_value')
+  name2 = req.body.name
+  res.cookie(name2, 'cookie_value')
 })
 app.post('/get_cookie', (req, res) => {
-  const name = req.body.name
-  res.send(req.cookies.name)
+  console.log(req.cookies.name2);
+  name2 = req.body.name
+  res.send(req.cookies.name2)
 })
 
 app.get('/api/full', (req, res) => {
