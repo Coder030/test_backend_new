@@ -17,16 +17,18 @@ app.get('/', (req, res) => {
 app.use(cookieParser())
 app.post('/make_cookie', (req, res) => {
   const name2 = req.body.name  
-  return res.cookie("cookie_name", name2).send({ success: true, message: "Success, new user created!"})
+  return res.cookie(name2, name2).send({ success: true, message: "Success, new user created!"})
 })
 app.post('/get_cookie', (req, res) => {
+  console.log(req.cookies);
+  
   const name2 = req.body.name
   const cookie = req.cookies[name2]
   if (cookie === undefined){
     res.json("Sorry, we couldn't find the cookie")
   }
   else {
-    res.send(req.cookies[name2])
+    res.send(cookie)
   }
 })
 
