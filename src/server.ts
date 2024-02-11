@@ -17,7 +17,7 @@ app.get('/', (req, res) => {
 app.use(cookieParser())
 app.post('/make_cookie', (req, res) => {
   const name2 = req.body.name  
-  return res.cookie(name2, name2).send({ success: true, message: "Success, new user created!"})
+  return res.cookie(name2, name2).json({ success: true, message: "Success, new user created!"})
 })
 app.post('/get_cookie', (req, res) => {
   console.log(req.cookies);
