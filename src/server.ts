@@ -28,7 +28,7 @@ app.post('/get_cookie', (req, res) => {
     res.json({message: "nf"})
   }
   else {
-    res.json({cookie})
+    res.json({message: cookie})
   }
 })
 
