@@ -25,10 +25,10 @@ app.post('/get_cookie', (req, res) => {
   const name2 = req.body.name
   const cookie = req.cookies[name2]
   if (cookie === undefined){
-    res.json("Sorry, we couldn't find the cookie")
+    res.json(undefined)
   }
   else {
-    res.send(cookie)
+    res.json(cookie)
   }
 })
 
