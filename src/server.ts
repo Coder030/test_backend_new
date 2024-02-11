@@ -25,7 +25,7 @@ app.post('/get_cookie', (req, res) => {
   const name2 = req.body.name
   const cookie = req.cookies[name2]
   if (cookie === undefined){
-    res.json("nf")
+    res.json({message: "nf"})
   }
   else {
     res.json({cookie})
