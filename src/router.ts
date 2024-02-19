@@ -1,16 +1,31 @@
 import {Router} from 'express'
+import prisma from './db';
 
-const jobs: string[] = [];
 const router = Router()
 
-router.get('/full', (req, res) => {
+//this all is easy
+router.get('/full', async (req, res) => {
+  const jobs = await prisma.jobs.findMany()
   res.json(jobs)
 })
 
-router.post('/', (req, res) => {
-  jobs.push(req.body.item) // add the object in the list
-  console.log(jobs);
-  res.json(jobs)
-})
+router.post('/', async (req, res) => {
+  try{
+    const job = await prisma.jobs.create({
+      data: {
+        company: req.body.item['company'],
+        post: req.body.item['post'],
+        phone_num: req.body.item['phone_num'],
+        email: req.body.item['email']
+      }
+    })
+    res.json({message: job})
+  } catch(e){
+    res.json({data: "nope"})
+    console.log("nope");
+    
+  }
+}
+)
 
 export default router

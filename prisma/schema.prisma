@@ -14,3 +14,11 @@ model User {
   createdAt DateTime  @default(now())
   username  String    @unique
 }
+
+model Jobs {
+  company String 
+  post String
+  phone_num String
+  email String
+  JobID String @id @unique @default(uuid())
+}

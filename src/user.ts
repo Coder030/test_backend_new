@@ -1,33 +1,51 @@
 import prisma from "./db";
 import { createJWT } from "./auth";
 
+//sign up
 export const createNewUser = async (req, res, next) => {
-  try{
-    console.log("started")
-    const user = await prisma.user.create({
-      data: {
-        username: req.body.name,
-      }
-    })
-
-    const token = createJWT(user)
-    res.json({message: "hello"})
-  } catch(e){
-    e.type = 'input'
-    next(e)
+  
+  const ifUser = await prisma.user.findUnique({
+    where: {
+      username: req.body.name
+    }
+  })
+  if(!ifUser){
+    try{
+      //create user
+      const user = await prisma.user.create({
+        data: {
+          username: req.body.name,
+        }
+      })
+      //create token and make cookie
+      const token = createJWT(user, res, req)
+      res.json(user)
+      
+    } catch(e){
+      e.type = 'input'
+      next(e)
+    }
   }
+  else{
+    res.json({message: "same"})
+  }
+  
 }
-export const signin = async (req, res) => {
+//sign in
+export const signin = async (req, res) => {  
+  // find user  
   const user = await prisma.user.findUnique({
     where: {
       username: req.body.name,
     }
-  })
-
+  })  
+  // change the value of cookie to new token
  if(!user){
-  req.json({data: "nf"})
+  res.json({data: "nf"})
  }
  else{
-  res.json({message: "A cookie named " + req.body.username + " has been found"})
+  const token = createJWT(user, res, req)
+  console.log(req.cookies);
+  res.json({message: "A cookie named " + user.username + " has been found"})
  }
 }

@@ -6,39 +6,29 @@ import cookieParser from 'cookie-parser'
 import { protect } from "./auth";
 import { createNewUser, signin } from "./user";
 
+
 export const app = express()
-app.use(cors({credentials: true, origin: 'http://localhost:3000'}))
+const corsOptions = {
+  credentials: true,
+  origin: 'http://localhost:3000',
+};
+
+app.use(cors(corsOptions));
 app.use(express.json())
 
-
+//don't look at this
 app.get('/', (req, res) => {
   console.log('hello from express!');
   res.json({message: 'this is GET /'})
 })
 
+//this is the main things
 app.use(cookieParser())
+
+//protected routes for frontend
 app.use('/api', protect, router)
-app.post('/make_cookie',
-  // if (name2 in req.cookies) {
-  //   console.log(`Username ${name2} already exists. Choosing another username.`);
-  //   res.json({data: 'e'})
-  // } else {
-  //   // Username doesn't exist, set the cookie
-  //   res.cookie(name2, name2).json({ success: true, message: "Success, new user created!" });
-  // }
-  createNewUser);
-app.post('/get_cookie', (req, res) => {
-  // console.log(req.cookies);
-  // const name2 = req.body.name
-  // const cookie = req.cookies[name2]
-  // console.log(name2, cookie);
-  // if (cookie === undefined){
-  //   console.log("not valid user")
-  //   res.json({data: "nf"})
-  // }
-  // else {
-  //   res.json({message: "A cookie named " + cookie + " has been found"})
-  // }
-  signin
-})
+
+//these are for log/sign in 
+app.post('/make_cookie',createNewUser);
+app.post('/get_cookie', signin)
 
