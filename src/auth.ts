@@ -12,7 +12,8 @@ export const createJWT = (user:any, res, req) => {
      httpOnly: true, 
      maxAge: 60 * 60 * 24 * 30 * 6 * 1000,
      sameSite: "none",
-     secure: true
+     secure: true,
+     path: "/"
   })
   console.log(req.cookies);
   
@@ -29,6 +30,8 @@ export const protect = (req, res, next) => {
     
     const user = jwt.verify(token, process.env.JWT_SECRET)
     req.user = user
+    console.log(user);
+    
     next()
   }catch (e) {
     console.log(req.cookies);

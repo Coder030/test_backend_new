@@ -21,4 +21,5 @@ model Jobs {
   phone_num String
   email String
   JobID String @id @unique @default(uuid())
+  belongsToId String
 }
