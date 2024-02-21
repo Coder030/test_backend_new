@@ -3,11 +3,15 @@ import prisma from './db';
 
 const router = Router()
 
-//this all is easy
 router.get('/full', async (req, res) => {
-  const jobs = await prisma.jobs.findMany()
-  res.json(jobs)
-})
+  try {
+    const jobs = await prisma.jobs.findMany();
+    res.json(jobs);
+  } catch (error) {
+    console.error('Error fetching jobs:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
 router.delete('/:id', async (req, res) => {
   const deleted = await prisma.jobs.delete({
     where: {

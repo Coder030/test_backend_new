@@ -45,7 +45,6 @@ export const signin = async (req, res) => {
  }
  else{
   const token = createJWT(user, res, req)
-  console.log(req.cookies);
   res.json({message: "A cookie named " + user.username + " has been found"})
  }
 }

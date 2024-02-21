@@ -16,7 +16,6 @@ exports.app.get('/', function (req, res) {
 });
 exports.app.post('/', function (req, res) {
     job.push(req.body.item); // add the object in the list
-    console.log(job);
     res.json(job);
 });
 //# sourceMappingURL=server.js.map

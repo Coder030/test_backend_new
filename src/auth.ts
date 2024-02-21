@@ -15,27 +15,20 @@ export const createJWT = (user:any, res, req) => {
      secure: true,
      path: "/"
   })
-  console.log(req.cookies);
   
 };
 export const protect = (req, res, next) => {
   // find the token
   const token = req.cookies["token"]
-  console.log(token);
-  console.log(req.cookies);
   
   try{
     // verify if there is a token like that or not
-    console.log(token);
     
     const user = jwt.verify(token, process.env.JWT_SECRET)
     req.user = user
-    console.log(user);
     
     next()
   }catch (e) {
-    console.log(req.cookies);
-    
     console.log(e + "   this is the error!");
     res.json({message: 'nvt'})
     return

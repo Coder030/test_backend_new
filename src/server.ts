@@ -20,7 +20,6 @@ app.use(express.json())
 app.get('/', (req, res) => {
   console.log('hello from express!');
   res.json({message: 'this is GET /'})
-  console.log(req.cookies);
   
 })
 
