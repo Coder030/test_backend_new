@@ -10,7 +10,7 @@ import { createNewUser, signin } from "./user";
 export const app = express()
 const corsOptions = {
   credentials: true,
-  origin: 'https://job-poster-seven.vercel.app',
+  origin: ['https://job-poster-seven.vercel.app', 'http://localhost:3000'],
 };
 
 app.use(cors(corsOptions));
