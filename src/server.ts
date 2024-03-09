@@ -1,6 +1,7 @@
 import express from "express"
 import cors from 'cors'
 import router from "./router";
+import prisma from './db';
 // const cookieParser =  require('cookie-parser')
 import cookieParser from 'cookie-parser'
 import { protect } from "./auth";
@@ -22,6 +23,16 @@ app.get('/', (req, res) => {
   res.json({message: 'this is GET /'})
   
 })
+
+app.get('/full', async (req, res) => {
+  try {
+    const jobs = await prisma.jobs.findMany();
+    res.json(jobs);
+  } catch (error) {
+    console.error('Error fetching jobs:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
 
 //this is the main things
 app.use(cookieParser())
