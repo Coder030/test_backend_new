@@ -24,7 +24,7 @@ router.get("/me", async (req,res) => {
   // @ts-ignore 
   res.json({message: req.user})
 })
-router.get("check", (req,res) => {
+router.get("/check", (req,res) => {
   res.json({message: "good"})
 })
 router.post('/', async (req, res) => {
