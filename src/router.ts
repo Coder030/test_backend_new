@@ -24,8 +24,11 @@ router.get("/me", async (req,res) => {
   // @ts-ignore 
   res.json({message: req.user})
 })
+router.get("check", (req,res) => {
+  res.json({message: "good"})
+})
 router.post('/', async (req, res) => {
-  try{
+  try{  
     const job = await prisma.jobs.create({
       data: {
         company: req.body.item['company'],
